@@ -60,7 +60,7 @@ const Home = () => {
         {session ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Link href="/movements">
-              <Card className="hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer border-l-4 border-l-green-500 bg-gradient-to-br from-green-50 to-white">
+              <Card className="h-full hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer border-l-4 border-l-green-500 bg-gradient-to-br from-green-50 to-white">
                 <CardHeader className="pb-3">
                   <div className="flex items-center space-x-3">
                     <div className="p-2 bg-green-100 rounded-lg">
@@ -72,7 +72,7 @@ const Home = () => {
                     </div>
                   </div>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="flex-1">
                   <p className="text-sm text-gray-600">Accede a la lista completa de ingresos y egresos, agrega nuevos movimientos y mantén un registro detallado de tus finanzas.</p>
                 </CardContent>
               </Card>
@@ -80,7 +80,7 @@ const Home = () => {
             {user?.role === 'ADMIN' && (
               <>
                 <Link href="/users">
-                  <Card className="hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer border-l-4 border-l-blue-500 bg-gradient-to-br from-blue-50 to-white">
+                  <Card className="h-full hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer border-l-4 border-l-blue-500 bg-gradient-to-br from-blue-50 to-white">
                     <CardHeader className="pb-3">
                       <div className="flex items-center space-x-3">
                         <div className="p-2 bg-blue-100 rounded-lg">
@@ -92,13 +92,13 @@ const Home = () => {
                         </div>
                       </div>
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className="flex-1">
                       <p className="text-sm text-gray-600">Gestiona los usuarios registrados, edita sus roles y mantén el control de acceso al sistema.</p>
                     </CardContent>
                   </Card>
                 </Link>
                 <Link href="/reports">
-                  <Card className="hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer border-l-4 border-l-purple-500 bg-gradient-to-br from-purple-50 to-white">
+                  <Card className="h-full hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer border-l-4 border-l-purple-500 bg-gradient-to-br from-purple-50 to-white">
                     <CardHeader className="pb-3">
                       <div className="flex items-center space-x-3">
                         <div className="p-2 bg-purple-100 rounded-lg">
@@ -110,13 +110,13 @@ const Home = () => {
                         </div>
                       </div>
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className="flex-1">
                       <p className="text-sm text-gray-600">Visualiza gráficos de movimientos financieros, consulta el saldo actual y descarga reportes en formato CSV.</p>
                     </CardContent>
                   </Card>
                 </Link>
                 <Link href="/docs">
-                  <Card className="hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer border-l-4 border-l-orange-500 bg-gradient-to-br from-orange-50 to-white">
+                  <Card className="h-full hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer border-l-4 border-l-orange-500 bg-gradient-to-br from-orange-50 to-white">
                     <CardHeader className="pb-3">
                       <div className="flex items-center space-x-3">
                         <div className="p-2 bg-orange-100 rounded-lg">
@@ -128,7 +128,7 @@ const Home = () => {
                         </div>
                       </div>
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className="flex-1">
                       <p className="text-sm text-gray-600">Accede a la documentación interactiva de todos los endpoints de la API con ejemplos y parámetros.</p>
                     </CardContent>
                   </Card>
