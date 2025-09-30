@@ -73,17 +73,28 @@ const Home = () => {
                     </CardContent>
                   </Card>
                 </Link>
-                <Link href="/reports">
-                  <Card className="hover:shadow-lg transition-shadow cursor-pointer">
-                    <CardHeader>
-                      <CardTitle>Reportes</CardTitle>
-                      <CardDescription>Ver reportes y descargar datos.</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-gray-600">Visualiza gráficos de movimientos financieros, consulta el saldo actual y descarga reportes en formato CSV.</p>
-                    </CardContent>
-                  </Card>
-                </Link>
+                    <Link href="/reports">
+                      <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                        <CardHeader>
+                          <CardTitle>Reportes</CardTitle>
+                          <CardDescription>Ver reportes y descargar datos.</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-sm text-gray-600">Visualiza gráficos de movimientos financieros, consulta el saldo actual y descarga reportes en formato CSV.</p>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                    <Link href="/docs">
+                      <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+                        <CardHeader>
+                          <CardTitle>Documentación API</CardTitle>
+                          <CardDescription>Documentación completa de la API.</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-sm text-gray-600">Accede a la documentación interactiva de todos los endpoints de la API con ejemplos y parámetros.</p>
+                        </CardContent>
+                      </Card>
+                    </Link>
               </>
             )}
           </div>
