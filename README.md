@@ -28,6 +28,12 @@
    npm run dev
    ```
 
+6. Ejecuta las pruebas unitarias:
+   ```bash
+   npm test
+   ```
+   Para ver cobertura: `npm run test:coverage`
+
 6. Accede a http://localhost:3000
 
 ### Documentación de API
