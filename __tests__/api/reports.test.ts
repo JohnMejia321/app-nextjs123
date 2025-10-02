@@ -62,8 +62,8 @@ describe('/api/reports', () => {
         email: 'test@test.com',
         emailVerified: true,
         createdAt: new Date(),
-        updatedAt: new Date()
-      }
+        updatedAt: new Date(),
+      },
     } as any);
 
     await handler(req, res);
@@ -87,8 +87,8 @@ describe('/api/reports', () => {
         email: 'test@test.com',
         emailVerified: true,
         createdAt: new Date(),
-        updatedAt: new Date()
-      }
+        updatedAt: new Date(),
+      },
     } as any);
 
     await handler(req, res);
@@ -114,8 +114,8 @@ describe('/api/reports', () => {
         email: 'test@test.com',
         emailVerified: true,
         createdAt: new Date(),
-        updatedAt: new Date()
-      }
+        updatedAt: new Date(),
+      },
     } as any);
 
     await handler(req, res);

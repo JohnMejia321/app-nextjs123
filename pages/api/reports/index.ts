@@ -41,7 +41,10 @@ import { requireAdmin } from '@/lib/auth/utils';
 
 const prisma = new PrismaClient();
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method === 'GET') {
     // Reportes, solo admin
     const session = await requireAdmin(req, res);
@@ -53,21 +56,30 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
 
       // Calcula el saldo total sumando ingresos y restando egresos.
-      const balance = movements.reduce((sum: number, m: any) => {
-        return m.type === 'INCOME' ? sum + m.amount : sum - m.amount;
-      }, 0);
+      const balance = movements.reduce(
+        (sum: number, m: { type: string; amount: number }) => {
+          return m.type === 'INCOME' ? sum + m.amount : sum - m.amount;
+        },
+        0
+      );
 
       // Agrupa movimientos por día para gráfico de ingresos y egresos.
-      const chartData = movements.reduce((acc: Record<string, { ingresos: number; egresos: number }>, m: any) => {
-        const day = m.date.toISOString().split('T')[0]; // YYYY-MM-DD
-        if (!acc[day]) acc[day] = { ingresos: 0, egresos: 0 };
-        if (m.type === 'INCOME') {
-          acc[day].ingresos += m.amount;
-        } else {
-          acc[day].egresos += m.amount;
-        }
-        return acc;
-      }, {} as Record<string, { ingresos: number; egresos: number }>);
+      const chartData = movements.reduce(
+        (
+          acc: Record<string, { ingresos: number; egresos: number }>,
+          m: { type: string; amount: number; date: Date }
+        ) => {
+          const day = m.date.toISOString().split('T')[0]; // YYYY-MM-DD
+          if (!acc[day]) acc[day] = { ingresos: 0, egresos: 0 };
+          if (m.type === 'INCOME') {
+            acc[day].ingresos += m.amount;
+          } else {
+            acc[day].egresos += m.amount;
+          }
+          return acc;
+        },
+        {} as Record<string, { ingresos: number; egresos: number }>
+      );
 
       const chart = Object.entries(chartData)
         .sort(([a], [b]) => a.localeCompare(b)) // Ordenar por fecha
@@ -79,8 +91,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       // Genera archivo CSV con los datos de movimientos si se solicita.
       if (req.query.format === 'csv') {
-        const csv = 'Concepto,Tipo,Monto,Fecha,Usuario\n' +
-          movements.map((m: any) => `${m.concept},${m.type},${m.amount},${m.date.toISOString().split('T')[0]},${m.userId}`).join('\n');
+        const csv =
+          'Concepto,Tipo,Monto,Fecha,Usuario\n' +
+          movements
+            .map(
+              (m: {
+                concept: string;
+                type: string;
+                amount: number;
+                date: Date;
+                userId: string;
+              }) =>
+                `${m.concept},${m.type},${m.amount},${m.date.toISOString().split('T')[0]},${m.userId}`
+            )
+            .join('\n');
         res.setHeader('Content-Type', 'text/csv');
         res.setHeader('Content-Disposition', 'attachment; filename=report.csv');
         res.status(200).send(csv);
@@ -88,7 +112,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
 
       res.status(200).json({ balance, chart });
-    } catch (error) {
+    } catch {
       res.status(500).json({ error: 'Error generating report' });
     }
   } else {

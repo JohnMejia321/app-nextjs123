@@ -42,7 +42,10 @@ import { requireAdmin } from '@/lib/auth/utils';
 
 const prisma = new PrismaClient();
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const { id } = req.query;
   if (!id || typeof id !== 'string') {
     return res.status(400).json({ error: 'Invalid user ID' });
@@ -65,7 +68,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         select: { id: true, name: true, email: true, phone: true, role: true },
       });
       res.status(200).json(user);
-    } catch (error) {
+    } catch {
       res.status(500).json({ error: 'Error updating user' });
     }
   } else {

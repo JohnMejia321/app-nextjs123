@@ -31,7 +31,10 @@ import { requireAuth } from '@/lib/auth/utils';
 
 const prisma = new PrismaClient();
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method === 'GET') {
     const session = await requireAuth(req, res);
     if (!session) return;
@@ -42,7 +45,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         select: { id: true, name: true, email: true, phone: true, role: true },
       });
       res.status(200).json(user);
-    } catch (error) {
+    } catch {
       res.status(500).json({ error: 'Error fetching user' });
     }
   } else {

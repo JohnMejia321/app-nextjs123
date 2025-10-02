@@ -9,9 +9,7 @@ module.exports = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
   },
-  transformIgnorePatterns: [
-    'node_modules/(?!(@noble|@scure|better-auth)/)',
-  ],
+  transformIgnorePatterns: ['node_modules/(?!(@noble|@scure|better-auth)/)'],
   collectCoverageFrom: [
     '**/*.{ts,js}',
     '!**/node_modules/**',

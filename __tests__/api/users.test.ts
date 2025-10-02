@@ -41,8 +41,8 @@ describe('/api/users', () => {
         email: 'test@test.com',
         emailVerified: true,
         createdAt: new Date(),
-        updatedAt: new Date()
-      }
+        updatedAt: new Date(),
+      },
     } as any);
 
     await handler(req, res);

@@ -7,7 +7,8 @@ const options = {
     info: {
       title: 'API de Gestión de Ingresos y Egresos',
       version: '1.0.0',
-      description: 'API para gestionar movimientos financieros, usuarios y reportes',
+      description:
+        'API para gestionar movimientos financieros, usuarios y reportes',
     },
     servers: [
       {

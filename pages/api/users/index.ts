@@ -33,7 +33,10 @@ import { requireAdmin } from '@/lib/auth/utils';
 
 const prisma = new PrismaClient();
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method === 'GET') {
     // Listar usuarios, solo admin
     const session = await requireAdmin(req, res);
@@ -50,7 +53,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         },
       });
       res.status(200).json(users);
-    } catch (error) {
+    } catch {
       res.status(500).json({ error: 'Error fetching users' });
     }
   } else {

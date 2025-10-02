@@ -74,7 +74,11 @@ import { requireAuth, requireAdmin } from '@/lib/auth/utils';
 
 const prisma = new PrismaClient();
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+// eslint-disable-next-line complexity
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method === 'GET') {
     // Listar movimientos, accesible para todos autenticados
     const session = await requireAuth(req, res);
@@ -86,7 +90,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         orderBy: { date: 'desc' },
       });
       res.status(200).json(movements);
-    } catch (error) {
+    } catch {
       res.status(500).json({ error: 'Error fetching movements' });
     }
   } else if (req.method === 'POST') {
@@ -103,7 +107,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(400).json({ error: 'Invalid type' });
     }
 
-// Valida campos requeridos y tipo, luego crea el movimiento en la base de datos.
+    // Valida campos requeridos y tipo, luego crea el movimiento en la base de datos.
     try {
       const movement = await prisma.movement.create({
         data: {
@@ -115,7 +119,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         },
       });
       res.status(201).json(movement);
-    } catch (error) {
+    } catch {
       res.status(500).json({ error: 'Error creating movement' });
     }
   } else {

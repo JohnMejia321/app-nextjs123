@@ -5,27 +5,33 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 // Obtiene la sesión del usuario convirtiendo los headers de la request a un objeto Headers compatible.
-export async function getSession(req: NextApiRequest, res: NextApiResponse) {
+export const getSession = async (req: NextApiRequest, res: NextApiResponse) => {
   const headers = new Headers();
   Object.entries(req.headers).forEach(([key, value]) => {
     if (value) headers.set(key, Array.isArray(value) ? value.join(',') : value);
   });
   const session = await auth.api.getSession({ headers });
   return session;
-}
+};
 
 // Verifica la autenticación del usuario, devolviendo la sesión si existe o null si no.
-export async function requireAuth(req: NextApiRequest, res: NextApiResponse) {
+export const requireAuth = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+) => {
   const session = await getSession(req, res);
   if (!session) {
     res.status(401).json({ error: 'Unauthorized' });
     return null;
   }
   return session;
-}
+};
 
 // Verifica que el usuario tenga rol de administrador, consultando la base de datos.
-export async function requireAdmin(req: NextApiRequest, res: NextApiResponse) {
+export const requireAdmin = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+) => {
   const session = await requireAuth(req, res);
   if (!session) return null;
 
@@ -40,4 +46,4 @@ export async function requireAdmin(req: NextApiRequest, res: NextApiResponse) {
   }
 
   return session;
-}
+};

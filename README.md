@@ -3,12 +3,14 @@
 ### Instalación y Ejecución
 
 1. Clona el repositorio:
+
    ```bash
    git clone <url-del-repositorio>
    cd prueba-tecnica-fullstack
    ```
 
 2. Instala las dependencias:
+
    ```bash
    npm install
    ```
@@ -18,23 +20,27 @@
    - Completa las variables con tus credenciales de Supabase y GitHub OAuth.
 
 4. Configura la base de datos:
+
    ```bash
    npx prisma generate
    npx prisma db push
    ```
 
 5. Ejecuta el proyecto:
+
    ```bash
    npm run dev
    ```
 
 6. Ejecuta las pruebas unitarias:
+
    ```bash
    npm test
    ```
+
    Para ver cobertura: `npm run test:coverage`
 
-6. Accede a http://localhost:3000
+7. Accede a http://localhost:3000
 
 ### Documentación de API
 
@@ -105,14 +111,14 @@ El objetivo de esta prueba técnica es evaluar tus habilidades en el desarrollo 
   - **Backend:**
     - NextJS API routes para implementar endpoints REST.
     - Base de datos de Postgres en Supabase.
-     - **Documentación de API:** Implementar una ruta `/api/docs` que exponga la documentación del API usando OpenAPI/Swagger. Cada endpoint creado debe estar completamente documentado con sus parámetros, respuestas y ejemplos.
-   - **Protección de Datos:**
-     - Implementar control de acceso basado en roles (RBAC) para asegurar que solo los usuarios autorizados puedan acceder a ciertas funcionalidades y datos.
-     - Proteger el backend para que rechace conexiones no autenticadas.
-   - **Autenticación:**
-     - Utilizar [Better Auth](https://www.better-auth.com/) con [GitHub](https://github.com/settings/developers) como proveedor de autenticación y [Prisma](https://prisma.io) como adaptador para la autenticación por sesiones de base de datos.
-     - **IMPORTANTE:** Todos los nuevos usuarios que se registren deben ser automáticamente asignados con el rol "ADMIN" para facilitar las pruebas de la aplicación.
-   - **Pruebas unitarias**  - El candidato debe agregar al menos 3 pruebas unitarias donde considere necesario.
+    - **Documentación de API:** Implementar una ruta `/api/docs` que exponga la documentación del API usando OpenAPI/Swagger. Cada endpoint creado debe estar completamente documentado con sus parámetros, respuestas y ejemplos.
+  - **Protección de Datos:**
+    - Implementar control de acceso basado en roles (RBAC) para asegurar que solo los usuarios autorizados puedan acceder a ciertas funcionalidades y datos.
+    - Proteger el backend para que rechace conexiones no autenticadas.
+  - **Autenticación:**
+    - Utilizar [Better Auth](https://www.better-auth.com/) con [GitHub](https://github.com/settings/developers) como proveedor de autenticación y [Prisma](https://prisma.io) como adaptador para la autenticación por sesiones de base de datos.
+    - **IMPORTANTE:** Todos los nuevos usuarios que se registren deben ser automáticamente asignados con el rol "ADMIN" para facilitar las pruebas de la aplicación.
+  - **Pruebas unitarias** - El candidato debe agregar al menos 3 pruebas unitarias donde considere necesario.
   - **Despliegue:**
     - Desplegar el proyecto en Vercel.
 
