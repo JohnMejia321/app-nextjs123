@@ -20,6 +20,7 @@ import {
 const Home = () => {
   const [session, setSession] = useState<any>(null);
   const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkSession = async () => {
@@ -33,8 +34,16 @@ const Home = () => {
         }
       }
     };
-    checkSession();
+    checkSession().then(() => setLoading(false));
   }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
+        <p className="text-lg">Cargando...</p>
+      </div>
+    );
+  }
 
   const handleSignIn = async () => {
     await authClient.signIn.social({ provider: 'github' });
