@@ -4,6 +4,7 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+// Configura la autenticación usando better-auth con adaptador de Prisma para PostgreSQL, incluyendo login social con GitHub y cambio de email.
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: 'postgresql',

@@ -52,12 +52,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         orderBy: { date: 'asc' },
       });
 
-      // Calcular saldo actual
+      // Calcula el saldo total sumando ingresos y restando egresos.
       const balance = movements.reduce((sum: number, m: any) => {
         return m.type === 'INCOME' ? sum + m.amount : sum - m.amount;
       }, 0);
 
-      // Datos para gráfico: agrupar por día ingresos y egresos
+      // Agrupa movimientos por día para gráfico de ingresos y egresos.
       const chartData = movements.reduce((acc: Record<string, { ingresos: number; egresos: number }>, m: any) => {
         const day = m.date.toISOString().split('T')[0]; // YYYY-MM-DD
         if (!acc[day]) acc[day] = { ingresos: 0, egresos: 0 };
@@ -77,7 +77,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           egresos: (data as { ingresos: number; egresos: number }).egresos,
         }));
 
-      // Para CSV
+      // Genera archivo CSV con los datos de movimientos si se solicita.
       if (req.query.format === 'csv') {
         const csv = 'Concepto,Tipo,Monto,Fecha,Usuario\n' +
           movements.map((m: any) => `${m.concept},${m.type},${m.amount},${m.date.toISOString().split('T')[0]},${m.userId}`).join('\n');

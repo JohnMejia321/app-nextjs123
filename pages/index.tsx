@@ -58,7 +58,7 @@ const Home = () => {
       </header>
       <main className="container mx-auto p-4">
         {session ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-4 gap-6">
             <Link href="/movements">
               <Card className="h-full hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer border-l-4 border-l-green-500 bg-gradient-to-br from-green-50 to-white">
                 <CardHeader className="pb-3">

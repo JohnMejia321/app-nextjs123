@@ -103,6 +103,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(400).json({ error: 'Invalid type' });
     }
 
+// Valida campos requeridos y tipo, luego crea el movimiento en la base de datos.
     try {
       const movement = await prisma.movement.create({
         data: {
