@@ -1,10 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  cookies: {
-    sameSite: 'none',
-    secure: true
-  },
   async headers() {
     return [
       {
@@ -12,7 +8,7 @@ const nextConfig = {
         headers: [
           {
             key: 'Access-Control-Allow-Origin',
-            value: process.env.NEXT_PUBLIC_VERCEL_URL || '*'
+            value: '*'
           },
           {
             key: 'Access-Control-Allow-Credentials',
@@ -24,7 +20,11 @@ const nextConfig = {
           },
           {
             key: 'Access-Control-Allow-Headers',
-            value: 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization'
+            value: 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization, Cookie'
+          },
+          {
+            key: 'Access-Control-Expose-Headers',
+            value: 'Set-Cookie'
           },
           {
             key: 'Access-Control-Allow-Methods',
