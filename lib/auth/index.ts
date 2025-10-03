@@ -20,7 +20,7 @@ export const auth = betterAuth({
       enabled: true,
     },
   },
-  trustedOrigins: ['https://app-nextjs123-wfx3.vercel.app'],
+  trustedOrigins: ['https://app-nextjs123-xb82.vercel.app', 'http://localhost:3000'],
 });
 
 export type Session = typeof auth.$Infer.Session;
