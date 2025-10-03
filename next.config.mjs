@@ -1,16 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Asegurarnos de que la aplicación sea pública
+  experimental: {
+    isExternalDir: true,
+  },
+  // Permitir acceso público
+  skipMiddlewareUrlNormalize: true,
   async headers() {
-    return [
+    const headers = [
       {
         source: '/api/:path*',
         headers: [
           {
             key: 'Access-Control-Allow-Origin',
-            value: process.env.VERCEL_ENV === 'production' 
-              ? 'https://app-nextjs123.vercel.app'
-              : 'https://*.vercel.app'
+            value: '*'
           },
           {
             key: 'Access-Control-Allow-Credentials',
