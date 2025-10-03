@@ -1,14 +1,51 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Asegurarnos de que la aplicación sea pública
+  // Configuración para hacer la aplicación pública
   experimental: {
     isExternalDir: true,
   },
-  // Permitir acceso público
   skipMiddlewareUrlNormalize: true,
+  poweredByHeader: false,
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: '/:path*',
+          has: [
+            {
+              type: 'header',
+              key: 'x-vercel-protection-bypass',
+            },
+          ],
+          destination: '/:path*',
+        },
+      ],
+    }
+  },
   async headers() {
-    const headers = [
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: '*'
+          },
+          {
+            key: 'Access-Control-Allow-Methods',
+            value: 'GET,OPTIONS,PATCH,DELETE,POST,PUT'
+          },
+          {
+            key: 'Access-Control-Allow-Headers',
+            value: '*'
+          },
+          {
+            key: 'Access-Control-Allow-Credentials',
+            value: 'true'
+          },
+        ],
+      },
       {
         source: '/api/:path*',
         headers: [
