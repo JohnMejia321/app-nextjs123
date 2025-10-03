@@ -2,9 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   allowedDevOrigins: ['*'],
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  eslint: false,
 };
 
 export default nextConfig;
