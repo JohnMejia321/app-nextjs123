@@ -4,11 +4,13 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: '/api/auth/get-session',
+        source: '/api/:path*',
         headers: [
           {
             key: 'Access-Control-Allow-Origin',
-            value: '*'
+            value: process.env.VERCEL_ENV === 'production' 
+              ? 'https://app-nextjs123.vercel.app'
+              : 'https://*.vercel.app'
           },
           {
             key: 'Access-Control-Allow-Credentials',

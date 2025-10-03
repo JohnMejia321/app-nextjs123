@@ -1,6 +1,10 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
+function isVercelUrl(url: string) {
+  return url.endsWith('.vercel.app') || url.includes('-projects.vercel.app');
+}
+
 export function middleware(request: NextRequest) {
   const origin = request.headers.get('origin')
   
@@ -10,7 +14,7 @@ export function middleware(request: NextRequest) {
       status: 200,
       headers: {
         'Access-Control-Allow-Credentials': 'true',
-        'Access-Control-Allow-Origin': origin || '*',
+        'Access-Control-Allow-Origin': origin && isVercelUrl(origin) ? origin : '*',
         'Access-Control-Allow-Methods': 'GET,DELETE,PATCH,POST,PUT,OPTIONS',
         'Access-Control-Allow-Headers': 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization, Cookie',
         'Access-Control-Expose-Headers': 'Set-Cookie',
