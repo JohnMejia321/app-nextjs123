@@ -43,7 +43,10 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/api/:path*']
+  matcher: [
+    '/api/:path*',
+    '/api/auth/get-session'
+  ]
 }
 
   return response

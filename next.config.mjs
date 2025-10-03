@@ -4,7 +4,7 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: '/api/:path*',
+        source: '/api/auth/get-session',
         headers: [
           {
             key: 'Access-Control-Allow-Origin',
@@ -16,7 +16,7 @@ const nextConfig = {
           },
           {
             key: 'Access-Control-Allow-Methods',
-            value: 'GET,DELETE,PATCH,POST,PUT,OPTIONS'
+            value: 'GET,OPTIONS'
           },
           {
             key: 'Access-Control-Allow-Headers',
@@ -25,6 +25,10 @@ const nextConfig = {
           {
             key: 'Access-Control-Expose-Headers',
             value: 'Set-Cookie'
+          },
+          {
+            key: 'Set-Cookie',
+            value: '_vercel_sso_nonce=; Path=/; Secure; SameSite=None; HttpOnly'
           },
           {
             key: 'Access-Control-Allow-Methods',

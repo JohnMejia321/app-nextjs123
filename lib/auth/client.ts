@@ -10,4 +10,12 @@ export const authClient = createAuthClient({
     clientId: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
   },
+  cookies: {
+    sameSite: 'none',
+    secure: true
+  },
+  cors: {
+    origin: '*',
+    credentials: true
+  }
 });
