@@ -62,7 +62,13 @@ const Movements = () => {
     }
   };
 
-  if (!session) return <p>Cargando...</p>;
+  if (!session) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-500"></div>
+      </div>
+    );
+  }
 
   return (
     <div className='min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50'>

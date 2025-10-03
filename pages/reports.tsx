@@ -17,6 +17,7 @@ const Reports = () => {
   const [user, setUser] = useState<any>(null);
   const [balance, setBalance] = useState(0);
   const [chartData, setChartData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkSession = async () => {
@@ -31,7 +32,7 @@ const Reports = () => {
         }
       }
     };
-    checkSession();
+    checkSession().then(() => setLoading(false));
   }, []);
 
   const fetchReports = async () => {
@@ -46,6 +47,14 @@ const Reports = () => {
   const downloadCSV = () => {
     window.open('/api/reports?format=csv', '_blank');
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
 
   if (!session || !user || user.role !== 'ADMIN') return <p>No autorizado</p>;
 

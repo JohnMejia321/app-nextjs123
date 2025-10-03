@@ -16,6 +16,7 @@ const Users = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [editing, setEditing] = useState<string | null>(null);
   const [form, setForm] = useState({ name: '', role: '' });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkSession = async () => {
@@ -30,7 +31,7 @@ const Users = () => {
         }
       }
     };
-    checkSession();
+    checkSession().then(() => setLoading(false));
   }, []);
 
   const fetchUsers = async () => {
@@ -58,6 +59,14 @@ const Users = () => {
       fetchUsers();
     }
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
 
   if (!session || !user || user.role !== 'ADMIN') return <p>No autorizado</p>;
 
