@@ -21,6 +21,10 @@ export const auth = betterAuth({
     },
   },
   trustedOrigins: ['https://app-nextjs123-xb82-6sd4gtpy2-johnmejia321s-projects.vercel.app', 'http://localhost:3000'],
+  cors: {
+    origin: ['https://app-nextjs123-xb82-6sd4gtpy2-johnmejia321s-projects.vercel.app', 'http://localhost:3000'],
+    credentials: true,
+  },
 });
 
 export type Session = typeof auth.$Infer.Session;
