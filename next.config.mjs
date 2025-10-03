@@ -10,7 +10,7 @@ const nextConfig = {
           {
             key: 'Access-Control-Allow-Origin',
             value: process.env.NODE_ENV === 'production'
-              ? 'https://app-nextjs123-xb82-6sd4gtpy2-johnmejia321s-projects.vercel.app'
+              ? 'https://app-nextjs123-xb82-77p4oh9kv-johnmejia321s-projects.vercel.app'
               : 'http://localhost:3000',
           },
           {

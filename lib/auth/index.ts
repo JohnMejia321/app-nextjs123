@@ -20,9 +20,9 @@ export const auth = betterAuth({
       enabled: true,
     },
   },
-  trustedOrigins: ['https://app-nextjs123-xb82-6sd4gtpy2-johnmejia321s-projects.vercel.app', 'http://localhost:3000'],
+  trustedOrigins: ['https://app-nextjs123-xb82-6sd4gtpy2-johnmejia321s-projects.vercel.app', 'https://app-nextjs123-xb82-77p4oh9kv-johnmejia321s-projects.vercel.app', 'http://localhost:3000'],
   cors: {
-    origin: ['https://app-nextjs123-xb82-6sd4gtpy2-johnmejia321s-projects.vercel.app', 'http://localhost:3000'],
+    origin: ['https://app-nextjs123-xb82-6sd4gtpy2-johnmejia321s-projects.vercel.app', 'https://app-nextjs123-xb82-77p4oh9kv-johnmejia321s-projects.vercel.app', 'http://localhost:3000'],
     credentials: true,
   },
 });
