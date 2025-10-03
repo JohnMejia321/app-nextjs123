@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import swaggerJsdoc from 'swagger-jsdoc';
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const swaggerJsdoc = require('swagger-jsdoc');
 
 const options = {
   definition: {
