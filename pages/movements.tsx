@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { authClient } from '@/lib/auth/client';
 import Link from 'next/link';
 import { ArrowLeft, Plus, TrendingUp, TrendingDown } from 'lucide-react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 interface Movement {
   id: string;
@@ -13,9 +14,9 @@ interface Movement {
 }
 
 const Movements = () => {
+  const queryClient = useQueryClient();
   const [session, setSession] = useState<any>(null);
   const [user, setUser] = useState<any>(null);
-  const [movements, setMovements] = useState<Movement[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({
     concept: '',
@@ -34,19 +35,22 @@ const Movements = () => {
           const u = await res.json();
           setUser(u);
         }
-        fetchMovements();
       }
     };
     checkSession();
   }, []);
 
-  const fetchMovements = async () => {
-    const res = await fetch('/api/movements');
-    if (res.ok) {
-      const data = await res.json();
-      setMovements(data);
-    }
-  };
+  const { data: movements = [], isLoading: movementsLoading } = useQuery({
+    queryKey: ['movements'],
+    queryFn: async () => {
+      const res = await fetch('/api/movements');
+      if (res.ok) {
+        return res.json();
+      }
+      return [];
+    },
+    enabled: !!session,
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,14 +62,22 @@ const Movements = () => {
     if (res.ok) {
       setForm({ concept: '', amount: '', type: 'INCOME', date: '' });
       setShowForm(false);
-      fetchMovements();
+      queryClient.invalidateQueries({ queryKey: ['movements'] });
     }
   };
 
   if (!session) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-500"></div>
+      <div className='min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50 flex items-center justify-center'>
+        <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-green-500'></div>
+      </div>
+    );
+  }
+
+  if (movementsLoading) {
+    return (
+      <div className='min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50 flex items-center justify-center'>
+        <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-green-500'></div>
       </div>
     );
   }
@@ -203,7 +215,7 @@ const Movements = () => {
               </tr>
             </thead>
             <tbody>
-              {movements.map((m) => (
+              {movements.map((m: Movement) => (
                 <tr
                   key={m.id}
                   className='border-t border-gray-100 hover:bg-gray-50 transition-colors'

@@ -39,30 +39,26 @@ describe('/api/movements', () => {
     };
 
     // Setup mocks
-    jest
-      .spyOn(authUtils, 'requireAuth')
-      .mockResolvedValue({
-        user: {
-          id: 'test-user-id',
-          name: 'Test',
-          email: 'test@test.com',
-          emailVerified: true,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-      } as any);
-    jest
-      .spyOn(authUtils, 'requireAdmin')
-      .mockResolvedValue({
-        user: {
-          id: 'test-user-id',
-          name: 'Test',
-          email: 'test@test.com',
-          emailVerified: true,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-      } as any);
+    jest.spyOn(authUtils, 'requireAuth').mockResolvedValue({
+      user: {
+        id: 'test-user-id',
+        name: 'Test',
+        email: 'test@test.com',
+        emailVerified: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    } as any);
+    jest.spyOn(authUtils, 'requireAdmin').mockResolvedValue({
+      user: {
+        id: 'test-user-id',
+        name: 'Test',
+        email: 'test@test.com',
+        emailVerified: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    } as any);
 
     await handler(req, res);
 
