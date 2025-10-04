@@ -7,7 +7,7 @@ const nextConfig = {
   },
   skipMiddlewareUrlNormalize: true,
   poweredByHeader: false,
-  async rewrites() {
+  rewrites() {
     return {
       beforeFiles: [
         {
@@ -23,7 +23,7 @@ const nextConfig = {
       ],
     }
   },
-  async headers() {
+  headers() {
     return [
       {
         source: '/:path*',
