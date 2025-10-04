@@ -25,7 +25,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     // Get the session
-    const session = await auth.getSession(req);
+    const headers = new Headers();
+    Object.entries(req.headers).forEach(([key, value]) => {
+      if (value) headers.set(key, Array.isArray(value) ? value.join(',') : value);
+    });
+    const session = await auth.api.getSession({ headers });
 
     // Set cookie with correct attributes
     res.setHeader('Set-Cookie', [
