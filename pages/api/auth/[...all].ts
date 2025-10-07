@@ -9,6 +9,7 @@ const allowedOrigins = [
   'https://app-nextjs123-xb82-6sd4gtpy2-johnmejia321s-projects.vercel.app',
   'https://app-nextjs123-xb82-77p4oh9kv-johnmejia321s-projects.vercel.app',
   'https://app-nextjs123-xb82-z9m6qz94g-johnmejia321s-projects.vercel.app',
+  'https://app-nextjs123-xb82.vercel.app',
   'http://localhost:3000'
 ];
 
