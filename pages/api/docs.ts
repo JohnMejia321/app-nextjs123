@@ -14,20 +14,7 @@ const options = {
     servers: [
       {
         url: 'https://app-nextjs123-xb82.vercel.app',
-      },
-    ],
-    components: {
-      securitySchemes: {
-        bearerAuth: {
-          type: 'http',
-          scheme: 'bearer',
-          bearerFormat: 'JWT',
-        },
-      },
-    },
-    security: [
-      {
-        bearerAuth: [],
+        description: 'Production server',
       },
     ],
   },
