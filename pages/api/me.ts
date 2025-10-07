@@ -3,8 +3,6 @@
  * /api/me:
  *   get:
  *     summary: Obtener información del usuario actual
- *     security:
- *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Información del usuario
