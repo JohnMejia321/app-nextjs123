@@ -13,7 +13,7 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:3000',
+        url: 'https://app-nextjs123-xb82.vercel.app',
       },
     ],
     components: {
