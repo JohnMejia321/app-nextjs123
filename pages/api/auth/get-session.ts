@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { auth } from '@/lib/auth';
+import { getSession } from '@/lib/auth/utils';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   // Get the origin
@@ -25,11 +25,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     // Get the session
-    const headers = new Headers();
-    Object.entries(req.headers).forEach(([key, value]) => {
-      if (value) headers.set(key, Array.isArray(value) ? value.join(',') : value);
-    });
-    const session = await auth.api.getSession({ headers });
+    const session = await getSession(req, res);
 
     // Set cookie with correct attributes
     res.setHeader('Set-Cookie', [
